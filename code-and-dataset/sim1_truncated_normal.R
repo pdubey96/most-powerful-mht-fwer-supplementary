@@ -456,6 +456,8 @@ print(data.frame(
 ## PLOTTING (Produces Figure 1 in manuscript)
 ## -----------------------------
 
+
+
 # 1. Load required libraries
 library(ggplot2)
 library(tidyr)
@@ -487,7 +489,10 @@ p1 <- ggplot(tabA_long, aes(x = theta, y = Power, color = Method, shape = Method
     plot.title = element_text(hjust = 0.5), 
     legend.title = element_blank(),
     legend.position = c(0.22, 0.75), # Legend inside: 22% from left, 75% from bottom
-    legend.background = element_rect(fill = "white", colour = "grey80")
+    legend.background = element_rect(fill = "white", colour = "grey80"),
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24),
+    legend.text = element_text(size = 18)
   )
 
 # 6. Plot 2 (Minimal Power Pi_any)
@@ -502,7 +507,9 @@ p2 <- ggplot(tabB_long, aes(x = theta, y = Power, color = Method, shape = Method
   theme_bw(base_size = 14) +
   theme(
     plot.title = element_text(hjust = 0.5), 
-    legend.position = "none" # Remove legend (redundant)
+    legend.position = "none", # Remove legend (redundant)
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24)
   )
 
 # 7. Combine and Save
@@ -510,4 +517,4 @@ combined_plot <- p1 + p2
 
 print(combined_plot)
 # Save as PDF for manuscript
-ggsave("path to directory", combined_plot, width = 12, height = 6)
+ggsave("path to directory/filename.pdf", combined_plot, width = 12.5, height = 6)
