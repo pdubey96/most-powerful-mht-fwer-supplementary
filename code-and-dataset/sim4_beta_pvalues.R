@@ -383,6 +383,11 @@ print(data.frame(
 ), row.names = FALSE)
 
 
+
+
+
+
+
 ## -----------------------------
 ## PLOTTING (Produces Figure 4 in Manuscript)
 ## -----------------------------
@@ -418,7 +423,10 @@ p1 <- ggplot(tabA_long, aes(x = theta, y = Power, color = Method, shape = Method
     plot.title = element_text(hjust = 0.5), 
     legend.title = element_blank(),
     legend.position = c(0.22, 0.75), # Place legend inside
-    legend.background = element_rect(fill = "white", colour = "grey80") 
+    legend.background = element_rect(fill = "white", colour = "grey80"),
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24),
+    legend.text = element_text(size = 18)
   )
 
 # 6. Plot 2 (Minimal Power Pi_any)
@@ -433,12 +441,17 @@ p2 <- ggplot(tabB_long, aes(x = theta, y = Power, color = Method, shape = Method
   theme_bw(base_size = 14) +
   theme(
     plot.title = element_text(hjust = 0.5), 
-    legend.position = "none" # Remove legend
+    legend.position = "none", # Remove legend
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24)
   )
 
-# 7. Combine and Save
+# 7. Combine and Save 
+p1 <- p1 + theme(plot.margin = margin(5.5, 40, 5.5, 5.5))
+p2 <- p2 + theme(plot.margin = margin(5.5, 5.5, 5.5, 40))
 combined_plot <- p1 + p2
 
 print(combined_plot)
 # Save as PDF for manuscript
-ggsave("path to directory", combined_plot, width = 12, height = 6)
+# ggsave("path to directory", combined_plot, width = 12, height = 6)
+ggsave("path to directory/filename.pdf", combined_plot, width = 13.5, height = 6)
