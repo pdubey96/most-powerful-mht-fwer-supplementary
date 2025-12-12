@@ -396,6 +396,65 @@ print(data.frame(
 
 # --- Start of Plotting Code ---
 
+# # 1. Load required libraries
+# library(ggplot2)
+# library(tidyr)
+# library(patchwork)
+# 
+# # 2. Make 'Method' a factor to control order
+# method_levels <- c("Bonferroni", "Holm", "Hochberg", "Hommel", "RomanoWolf", "OurMethod")
+# # --- THIS LINE IS ADDED ---
+# method_labels <- c("Bonferroni", "Holm", "Hochberg", "Hommel", "RomanoWolf", "Algorithm 1")
+# 
+# # 3. Pivot Table A (using the 'tabA' data frame from the simulation)
+# tabA_long <- pivot_longer(tabA, cols = -theta, names_to = "Method", values_to = "Power")
+# # --- THIS LINE IS CHANGED (added labels) ---
+# tabA_long$Method <- factor(tabA_long$Method, levels = method_levels, labels = method_labels)
+# 
+# # 4. Pivot Table B (using the 'tabB' data frame from the simulation)
+# tabB_long <- pivot_longer(tabB, cols = -theta, names_to = "Method", values_to = "Power")
+# # --- THIS LINE IS CHANGED (added labels) ---
+# tabB_long$Method <- factor(tabB_long$Method, levels = method_levels, labels = method_labels)
+# 
+# # 5. --- MODIFIED Plot 1 (Pi_3) ---
+# # We will add the legend *inside* this plot
+# p1 <- ggplot(tabA_long, aes(x = theta, y = Power, color = Method, shape = Method, linetype = Method)) +
+#   geom_line(linewidth = 0.8) +
+#   geom_point(size = 3, alpha = 0.8) +
+#   labs(title = NULL,
+#        x = expression(paste("Signal Strength (", theta, ")")),
+#        y = expression(paste("Average Power (", Pi[3], ")"))) +
+#   # --- THIS LINE IS CHANGED (added labels) ---
+#   scale_x_reverse(labels = function(x) sprintf("%.1f", x)) + 
+#   # --- THIS LINE IS CHANGED (added labels) ---
+#   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2), labels = function(x) sprintf("%.1f", x)) +
+#   theme_bw(base_size = 14) +
+#   theme(
+#     plot.title = element_text(hjust = 0.5), 
+#     legend.title = element_blank(),
+#     legend.position = c(0.22, 0.75), # Place legend inside: 22% from left, 75% from bottom
+#     legend.background = element_rect(fill = "white", colour = "grey80") # Add a box
+#   )
+# 
+# # 6. --- MODIFIED Plot 2 (Pi_any) ---
+# # We will *remove* the legend from this plot
+# p2 <- ggplot(tabB_long, aes(x = theta, y = Power, color = Method, shape = Method, linetype = Method)) +
+#   geom_line(linewidth = 0.8) +
+#   geom_point(size = 3, alpha = 0.8) +
+#   labs(title = NULL,
+#        x = expression(paste("Signal Strength (", theta, ")")),
+#        y = expression(paste("Minimal Power (", Pi[any], ")"))) +
+#   # --- THIS LINE IS CHANGED (added labels) ---
+#   scale_x_reverse(labels = function(x) sprintf("%.1f", x)) +
+#   # --- THIS LINE IS CHANGED (added labels) ---
+#   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2), labels = function(x) sprintf("%.1f", x)) +
+#   theme_bw(base_size = 14) +
+#   theme(
+#     plot.title = element_text(hjust = 0.5), 
+#     legend.position = "none" # Remove legend
+#   )
+
+
 # 1. Load required libraries
 library(ggplot2)
 library(tidyr)
@@ -433,7 +492,10 @@ p1 <- ggplot(tabA_long, aes(x = theta, y = Power, color = Method, shape = Method
     plot.title = element_text(hjust = 0.5), 
     legend.title = element_blank(),
     legend.position = c(0.22, 0.75), # Place legend inside: 22% from left, 75% from bottom
-    legend.background = element_rect(fill = "white", colour = "grey80") # Add a box
+    legend.background = element_rect(fill = "white", colour = "grey80"), # Add a box
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24),
+    legend.text = element_text(size = 18)
   )
 
 # 6. --- MODIFIED Plot 2 (Pi_any) ---
@@ -451,16 +513,20 @@ p2 <- ggplot(tabB_long, aes(x = theta, y = Power, color = Method, shape = Method
   theme_bw(base_size = 14) +
   theme(
     plot.title = element_text(hjust = 0.5), 
-    legend.position = "none" # Remove legend
+    legend.position = "none", # Remove legend
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24)
   )
 
-# 7. --- MODIFIED Combination ---
-# We no longer need to collect guides
+
+# 7. Combine and Save 
+p1 <- p1 + theme(plot.margin = margin(5.5, 40, 5.5, 5.5))
+p2 <- p2 + theme(plot.margin = margin(5.5, 5.5, 5.5, 40))
 combined_plot <- p1 + p2
 
 # 8. Display and save the final plot
 print(combined_plot)
-# ggsave("beta_simulation_plots_legend_inside.png", combined_plot, width = 12, height = 6, dpi = 300)
+
 # --- CHANGING FILENAME ---
-ggsave("path to directory", combined_plot, width = 12, height = 6)
+ggsave("path to directory/filename.pdf", combined_plot, width = 13.5, height = 6)
 # --- End of Plotting Code ---
