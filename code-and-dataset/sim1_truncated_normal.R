@@ -512,9 +512,13 @@ p2 <- ggplot(tabB_long, aes(x = theta, y = Power, color = Method, shape = Method
     axis.text  = element_text(size = 24)
   )
 
-# 7. Combine and Save
+
+# 7. Combine and Save 
+p1 <- p1 + theme(plot.margin = margin(5.5, 40, 5.5, 5.5))
+p2 <- p2 + theme(plot.margin = margin(5.5, 5.5, 5.5, 40))
 combined_plot <- p1 + p2
 
 print(combined_plot)
 # Save as PDF for manuscript
+# ggsave("path to directory", combined_plot, width = 12, height = 6)
 ggsave("path to directory/filename.pdf", combined_plot, width = 12.5, height = 6)
