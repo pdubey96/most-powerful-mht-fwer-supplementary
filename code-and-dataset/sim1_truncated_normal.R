@@ -521,4 +521,4 @@ combined_plot <- p1 + p2
 print(combined_plot)
 # Save as PDF for manuscript
 # ggsave("path to directory", combined_plot, width = 12, height = 6)
-ggsave("path to directory/filename.pdf", combined_plot, width = 12.5, height = 6)
+ggsave("path to directory/filename.pdf", combined_plot, width = 13.5, height = 6)
