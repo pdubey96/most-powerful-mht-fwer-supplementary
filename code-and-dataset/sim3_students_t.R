@@ -441,8 +441,11 @@ p1 <- ggplot(tabA_long, aes(x = df, y = Power, color = Method, shape = Method, l
   theme(
     plot.title = element_text(hjust = 0.5), 
     legend.title = element_blank(),
-    legend.position = c(0.8, 0.6), # Adjusted position for new zoom
-    legend.background = element_rect(fill = "white", colour = "grey80")
+    legend.position = c(0.6, 0.6), # Adjusted position for new zoom
+    legend.background = element_rect(fill = "white", colour = "grey80"),
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24),
+    legend.text = element_text(size = 18)
   )
 
 # 6. --- MODIFIED Plot 2 (Pi_any) ---
@@ -457,14 +460,19 @@ p2 <- ggplot(tabB_long, aes(x = df, y = Power, color = Method, shape = Method, l
   scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 0.4, 0.1), labels = function(x) sprintf("%.1f", x)) +
   theme_bw(base_size = 14) +
   theme(
-    plot.title = element_text(hjust = 0.5), sc
-    legend.position = "none"
+    plot.title = element_text(hjust = 0.5), 
+    legend.position = "none",
+    axis.title = element_text(size = 28),
+    axis.text  = element_text(size = 24)
   )
 
+
 # 7. --- MODIFIED Combination ---
+p1 <- p1 + theme(plot.margin = margin(5.5, 40, 5.5, 5.5))
+p2 <- p2 + theme(plot.margin = margin(5.5, 5.5, 5.5, 40))
 combined_plot <- p1 + p2
 
 # 8. Display and save the final plot
 print(combined_plot)
-ggsave("path to directory", combined_plot, width = 12, height = 6)
+ggsave("path to directory/filename.pdf", combined_plot, width = 13.5, height = 6)
 # --- End of Plotting Code ---
