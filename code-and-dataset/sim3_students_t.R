@@ -441,11 +441,11 @@ p1 <- ggplot(tabA_long, aes(x = df, y = Power, color = Method, shape = Method, l
   theme(
     plot.title = element_text(hjust = 0.5), 
     legend.title = element_blank(),
-    legend.position = c(0.6, 0.6), # Adjusted position for new zoom
+    legend.position = c(0.7, 0.7), # Adjusted position for new zoom
     legend.background = element_rect(fill = "white", colour = "grey80"),
     axis.title = element_text(size = 28),
     axis.text  = element_text(size = 24),
-    legend.text = element_text(size = 18)
+    legend.text = element_text(size = 20)
   )
 
 # 6. --- MODIFIED Plot 2 (Pi_any) ---
