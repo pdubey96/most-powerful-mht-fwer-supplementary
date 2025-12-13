@@ -672,11 +672,10 @@ focused_plot <- ggplot(risk_data_long, aes(x = Method, y = p_value)) +
     panel.grid.minor.x = element_blank(),
     axis.title.y = element_text(size = 24), 
     axis.text.x = element_text(angle = 45, hjust = 1, size = 24), 
-    axis.text.y = element_text(size = 22) 
+    axis.text.y = element_text(size = 24) ,
+    panel.spacing = unit(1.2, "lines")
   )
 
 # 6. Save and Print
-ggsave("path to directory", ffocused_plot, width = 13.5, height = 6)
-
-
+ggsave("path to directory", focused_plot, width = 13.5, height = 6)
 # --- End of Focused Plotting Code ---
