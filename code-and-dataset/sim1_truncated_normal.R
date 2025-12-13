@@ -488,11 +488,11 @@ p1 <- ggplot(tabA_long, aes(x = theta, y = Power, color = Method, shape = Method
   theme(
     plot.title = element_text(hjust = 0.5), 
     legend.title = element_blank(),
-    legend.position = c(0.22, 0.75), # Legend inside: 22% from left, 75% from bottom
+    legend.position = c(0.23, 0.8), # Legend inside: 22% from left, 75% from bottom
     legend.background = element_rect(fill = "white", colour = "grey80"),
     axis.title = element_text(size = 28),
     axis.text  = element_text(size = 24),
-    legend.text = element_text(size = 18)
+    legend.text = element_text(size = 20)
   )
 
 # 6. Plot 2 (Minimal Power Pi_any)
@@ -519,6 +519,5 @@ p2 <- p2 + theme(plot.margin = margin(5.5, 5.5, 5.5, 40))
 combined_plot <- p1 + p2
 
 print(combined_plot)
-# Save as PDF for manuscript
-# ggsave("path to directory", combined_plot, width = 12, height = 6)
+# Save as PDF for manuscript/Users/prasanjit/Documents/04 JRSSB submission
 ggsave("path to directory/filename.pdf", combined_plot, width = 13.5, height = 6)
