@@ -664,20 +664,19 @@ focused_plot <- ggplot(risk_data_long, aes(x = Method, y = p_value)) +
     plot.title = element_blank(),  
     plot.subtitle = element_blank(),
     strip.background = element_rect(fill = "grey90", color = "black"),
-    strip.text = element_text(size = 16), 
+    strip.text = element_text(size = 24), 
     legend.position = "bottom",
-    legend.title = element_text(size = 16, face = "bold"), 
-    legend.text = element_text(size = 14), 
+    legend.title = element_text(size = 24, face = "bold"), 
+    legend.text = element_text(size = 24), 
     panel.grid.major.x = element_blank(),  
     panel.grid.minor.x = element_blank(),
-    axis.title.y = element_text(size = 16), 
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
-    axis.text.y = element_text(size = 12) 
+    axis.title.y = element_text(size = 24), 
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 24), 
+    axis.text.y = element_text(size = 22) 
   )
 
 # 6. Save and Print
-ggsave("path to directory", focused_plot, width = 12, height = 5.5)
+ggsave("path to directory", ffocused_plot, width = 13.5, height = 6)
 
-print(focused_plot)
 
 # --- End of Focused Plotting Code ---
